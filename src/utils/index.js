@@ -1,3 +1,5 @@
+export const validateCreation = new RegExp('^.{6,40}$');
+
 export const uuidGenerator = () => {
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
