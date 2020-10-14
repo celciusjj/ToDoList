@@ -16,8 +16,25 @@ function ToDoList() {
                     isDeleted: true,
                     isCompleted: list[i].isCompleted
                 }
-                
-                list.splice(i,1)
+
+                list.splice(i, 1)
+                handleList([...list, taskModified])
+            }
+        }
+    }
+
+    const finishTask = (taskId) => {
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].id == taskId) {
+                console.log(list[i].isDeleted)
+                const taskModified = {
+                    id: list[i].id,
+                    text: list[i].text,
+                    isDeleted: list[i].isDeleted,
+                    isCompleted: true
+                }
+
+                list.splice(i, 1)
                 handleList([...list, taskModified])
             }
         }
@@ -27,10 +44,9 @@ function ToDoList() {
         <div>
             <ToDoAdd tasks={list} addTask={handleList} />
             {
-
                 list.map((item, i) => (
                     !item.isDeleted ?
-                        <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} key={i}></ToDo>
+                        <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} key={i}></ToDo>
                         : ""
                 ))
             }
