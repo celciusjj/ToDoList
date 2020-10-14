@@ -12,10 +12,9 @@ function ToDoList() {
      * @param {*} taskId 
      * One way to modify the list in state, with for
      */
-    const removeFromList = (taskId) => {
+    function removeFromList(taskId) {
         for (let i = 0; i < list.length; i++) {
-            if (list[i].id == taskId) {
-                console.log(list[i].isDeleted)
+            if (list[i].id === taskId) {
                 const taskModified = {
                     id: list[i].id,
                     text: list[i].text,
@@ -33,10 +32,10 @@ function ToDoList() {
      * @param {*} taskId 
      * Second way to modify the list in state, with map
      */
-    const finishTask = (taskId) => {
+    function finishTask(taskId) {
         let newList = []
         list.map(item => {
-            if (item.id == taskId) {
+            if (item.id === taskId) {
                 let newItem = {
                     id: item.id,
                     text: item.text,
@@ -51,10 +50,10 @@ function ToDoList() {
         })
     }
 
-    const editTask = (taskId, text) => {
+    function editTask (taskId, text) {
         let newList = []
         list.map(item => {
-            if (item.id == taskId) {
+            if (item.id === taskId) {
                 let newItem = {
                     id: item.id,
                     text: text,
@@ -79,7 +78,7 @@ function ToDoList() {
                         : ""
                 ))
             }
-            <ReCount/>
+            <ReCount tasks={list} />
         </div>
     )
 }

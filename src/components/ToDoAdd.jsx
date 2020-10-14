@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button"
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
-import { validateCreation } from "../utils/index"
+import { validateCreation, uuidGenerator } from "../utils/index"
 
 function ToDoAdd(props) {
 
@@ -27,7 +27,8 @@ function ToDoAdd(props) {
             const newTask = {
                 text: task,
                 isDeleted: false,
-                isCompleted: false
+                isCompleted: false,
+                id: uuidGenerator()
             }
             props.addTask([...props.tasks, newTask])
             setTask("")

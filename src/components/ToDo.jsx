@@ -28,12 +28,7 @@ function ToDo(props) {
     const handleChangeCheckBox = () => {
         props.finishTask(props.uuid)
         setChecked(true);
-        console.log(props)
     };
-
-    const handleEdit = () => {
-
-    }
 
     const classes = useStyles();
     return (

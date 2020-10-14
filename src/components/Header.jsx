@@ -7,6 +7,16 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+const options = [
+  'Sin filtro',
+  'Completados',
+  'Incompletos',
+  'Eliminados',
+];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,10 +73,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+const ITEM_HEIGHT = 48;
 function Header() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const classes = useStyles();
   return (
-
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
@@ -93,6 +114,34 @@ function Header() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
+
+            <IconButton
+              aria-label="more"
+              aria-controls="long-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              id="long-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={open}
+              onClose={handleClose}
+              PaperProps={{
+                style: {
+                  maxHeight: ITEM_HEIGHT * 4.5,
+                  width: '20ch',
+                },
+              }}
+            >
+              {options.map((option) => (
+                <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Menu>
           </div>
         </Toolbar>
       </AppBar>
