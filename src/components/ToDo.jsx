@@ -1,15 +1,15 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
 import ToDoEdit from "./ToDoEdit"
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        overflow: 'hidden',
+        overflow: "hidden",
         padding: theme.spacing(0, 3),
     },
     paper: {
@@ -42,7 +42,7 @@ function ToDo(props) {
                                 <Checkbox
                                     checked={checked}
                                     onChange={handleChangeCheckBox}
-                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                    inputProps={{ "aria-label": "primary checkbox" }}
                                 />
                                 {props.text}
                             </Grid>

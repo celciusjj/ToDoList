@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
+import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button"
-import Snackbar from '@material-ui/core/Snackbar';
-import Alert from '@material-ui/lab/Alert';
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 import { validateCreation, uuidGenerator } from "../utils/index"
 
 function ToDoAdd(props) {
@@ -46,7 +46,7 @@ function ToDoAdd(props) {
 
     return (
         <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
-            <TextField value={task} onKeyPress={handleKeyEvent} id="outlined-basic" label="Ingrese su tarea" variant="outlined" onChange={onChangeTask} />
+            <TextField style={{width: "50%"}} value={task} onKeyPress={handleKeyEvent} id="outlined-basic" label="Ingrese su tarea" variant="outlined" onChange={onChangeTask} />
             <Button onClick={putNewTask} variant="contained" color="primary" style={{ marginLeft: 10 }}>
                 Agregar
             </Button>
