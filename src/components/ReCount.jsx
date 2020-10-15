@@ -10,7 +10,6 @@ function ReCount(props) {
 
     const filterByCompleted = () => {
         let result = props.tasks.filter(item => item.isCompleted === true)
-        console.log(result)
         setCompletes(result.length)
     }
 
@@ -38,7 +37,7 @@ function ReCount(props) {
 
     return (
         <Grid container style={{ marginTop: 20 }}>
-            <Grid  xs={12}>
+            <Grid item xs={12}>
                 <Grid container justify="center">
                     <Grid item style={{ textAlign: "center", marginRight: 20 }}>
                         <Typography variant="h5" >

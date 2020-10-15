@@ -3,9 +3,10 @@ import ToDo from "./ToDo"
 import ToDoAdd from "./ToDoAdd"
 import ReCount from "./ReCount"
 import { uuidGenerator } from "../utils"
+import { useSelector } from "react-redux"
 
 function ToDoList() {
-    const [list, handleList] = useState([{ text: "Quiero trabajar", isDeleted: false, isCompleted: false, id: uuidGenerator() }, { text: "en celerik :)", isDeleted: false, isCompleted: false, id: uuidGenerator() }]);
+    const [list, handleList] = useState([{ text: "quiero trabajar", isDeleted: false, isCompleted: false, id: uuidGenerator() }, { text: "en celerik :)", isDeleted: false, isCompleted: false, id: uuidGenerator() }]);
 
     /**
      * 
@@ -47,10 +48,11 @@ function ToDoList() {
                 newList.push(item);
             }
             handleList(newList)
+            return newList;
         })
     }
 
-    function editTask (taskId, text) {
+    function editTask(taskId, text) {
         let newList = []
         list.map(item => {
             if (item.id === taskId) {
@@ -64,19 +66,30 @@ function ToDoList() {
             } else {
                 newList.push(item);
             }
-            handleList(newList)
+            handleList(newList);
+            return newList;
         })
     }
+
+    const filterByText = useSelector(state => state.filters.filterText);
+    const filterByType = useSelector(state => state.filters.filterType);
 
     return (
         <div>
             <ToDoAdd tasks={list} addTask={handleList} />
             {
-                list.map((item, i) => (
-                    !item.isDeleted ?
-                        <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i}></ToDo>
-                        : ""
-                ))
+                filterByText.length >= 3 ?
+                    list.filter(task => task.text.includes(filterByText)).map((item, i) => (
+                        !item.isDeleted ?
+                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i}></ToDo>
+                            : ""
+                    ))
+                    :
+                    list.map((item, i) => (
+                        !item.isDeleted ?
+                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i}></ToDo>
+                            : ""
+                    ))
             }
             <ReCount tasks={list} />
         </div>

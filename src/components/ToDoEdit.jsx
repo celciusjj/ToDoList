@@ -26,7 +26,7 @@ export default function ToDoEdit(props) {
     const handleKeyEvent = (event) => {
         var code = event.keyCode || event.which;
         if (code === 13) { //13 is the enter keycode
-            // putNewTask();
+            editTask();
         }
     }
 
