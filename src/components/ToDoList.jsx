@@ -74,26 +74,86 @@ function ToDoList() {
     const filterByText = useSelector(state => state.filters.filterText);
     const filterByType = useSelector(state => state.filters.filterType);
 
+    const filterChecker = () => {
+        if (filterByText.length >= 3) {
+            const newList = list.filter(task => task.text.includes(filterByText));
+            if (filterByType === "Eliminados") {
+                return (
+                    newList.filter(task => task.isDeleted === true).map((item, i) => (
+                        <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i} />
+                    ))
+                )
+            } else if (filterByType === "Completados") {
+                return (
+                    newList.filter(task => task.isCompleted === true).map((item, i) => (
+                        !item.isDeleted ?
+                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i} />
+                            : ""
+                    ))
+                )
+            } else if (filterByType === "Incompletos") {
+                return (
+                    newList.filter(task => task.isCompleted !== true).map((item, i) => (
+                        !item.isDeleted ?
+                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i} />
+                            : ""
+                    ))
+                )
+            } else {
+                return (
+                    newList.map((item, i) => (
+                        !item.isDeleted ?
+                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i} />
+                            : ""
+                    ))
+                )
+            }
+        } else {
+            if (filterByType === "Eliminados") {
+                return (
+                    list.filter(task => task.isDeleted === true).map((item, i) => (
+                        <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i} />
+                    ))
+                )
+            } else if (filterByType === "Completados") {
+                return (
+                    list.filter(task => task.isCompleted === true).map((item, i) => (
+                        !item.isDeleted ?
+                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i} />
+                            : ""
+                    ))
+                )
+            } else if (filterByType === "Incompletos") {
+                return (
+                    list.filter(task => task.isCompleted !== true).map((item, i) => (
+                        !item.isDeleted ?
+                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i} />
+                            : ""
+                    ))
+                )
+            } else {
+                return (
+                    list.map((item, i) => (
+                        !item.isDeleted ?
+                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i} />
+                            : ""
+                    ))
+                )
+            }
+        }
+    }
+
     return (
         <div>
             <ToDoAdd tasks={list} addTask={handleList} />
             {
-                filterByText.length >= 3 ?
-                    list.filter(task => task.text.includes(filterByText)).map((item, i) => (
-                        !item.isDeleted ?
-                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i}></ToDo>
-                            : ""
-                    ))
-                    :
-                    list.map((item, i) => (
-                        !item.isDeleted ?
-                            <ToDo text={item.text} isDeleted={item.isDeleted} isCompleted={item.isCompleted} uuid={item.id} removeTask={removeFromList} finishTask={finishTask} editTask={editTask} key={i}></ToDo>
-                            : ""
-                    ))
+                filterChecker()
             }
             <ReCount tasks={list} />
         </div>
     )
 }
+
+
 
 export default ToDoList;

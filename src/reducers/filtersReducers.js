@@ -5,7 +5,7 @@ import {
 
 const initialState = {
     filterText: "",
-    filterType: null,
+    filterType: "Sin Filtro",
 }
 
 export default function (state = initialState, action) {

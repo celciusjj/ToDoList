@@ -14,7 +14,6 @@ export function filterByText(text) {
 
 export function filterByType(type) {
     return (dispatch) => {
-        console.log(type)
         dispatch({
             type: SET_FILTER_TYPE,
             payload: type

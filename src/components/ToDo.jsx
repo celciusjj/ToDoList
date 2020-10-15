@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ToDo(props) {
-    const [checked, setChecked] = React.useState(props.isCompleted);
     const [isOpen, setOpen] = React.useState(false);
 
     const handleChangeCheckBox = () => {
         props.finishTask(props.uuid)
-        setChecked(true);
     };
+
+    console.log(props.isCompleted + " " + props.uuid)
 
     const classes = useStyles();
     return (
@@ -40,7 +40,7 @@ function ToDo(props) {
                         <Grid container spacing={2}>
                             <Grid item xs>
                                 <Checkbox
-                                    checked={checked}
+                                    checked={props.isCompleted}
                                     onChange={handleChangeCheckBox}
                                     inputProps={{ "aria-label": "primary checkbox" }}
                                 />
